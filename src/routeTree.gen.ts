@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RessourcesRouteImport } from './routes/ressources'
+import { Route as PredicationsRouteImport } from './routes/predications'
+import { Route as LivreRouteImport } from './routes/livre'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AgendaRouteImport } from './routes/agenda'
+import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RessourcesRoute = RessourcesRouteImport.update({
+  id: '/ressources',
+  path: '/ressources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredicationsRoute = PredicationsRouteImport.update({
+  id: '/predications',
+  path: '/predications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivreRoute = LivreRouteImport.update({
+  id: '/livre',
+  path: '/livre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendaRoute = AgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/agenda': typeof AgendaRoute
+  '/contact': typeof ContactRoute
+  '/livre': typeof LivreRoute
+  '/predications': typeof PredicationsRoute
+  '/ressources': typeof RessourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/agenda': typeof AgendaRoute
+  '/contact': typeof ContactRoute
+  '/livre': typeof LivreRoute
+  '/predications': typeof PredicationsRoute
+  '/ressources': typeof RessourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/agenda': typeof AgendaRoute
+  '/contact': typeof ContactRoute
+  '/livre': typeof LivreRoute
+  '/predications': typeof PredicationsRoute
+  '/ressources': typeof RessourcesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/a-propos'
+    | '/agenda'
+    | '/contact'
+    | '/livre'
+    | '/predications'
+    | '/ressources'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/agenda'
+    | '/contact'
+    | '/livre'
+    | '/predications'
+    | '/ressources'
+    | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-propos'
+    | '/agenda'
+    | '/contact'
+    | '/livre'
+    | '/predications'
+    | '/ressources'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AProposRoute: typeof AProposRoute
+  AgendaRoute: typeof AgendaRoute
+  ContactRoute: typeof ContactRoute
+  LivreRoute: typeof LivreRoute
+  PredicationsRoute: typeof PredicationsRoute
+  RessourcesRoute: typeof RessourcesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ressources': {
+      id: '/ressources'
+      path: '/ressources'
+      fullPath: '/ressources'
+      preLoaderRoute: typeof RessourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/predications': {
+      id: '/predications'
+      path: '/predications'
+      fullPath: '/predications'
+      preLoaderRoute: typeof PredicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/livre': {
+      id: '/livre'
+      path: '/livre'
+      fullPath: '/livre'
+      preLoaderRoute: typeof LivreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agenda': {
+      id: '/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AgendaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AProposRoute: AProposRoute,
+  AgendaRoute: AgendaRoute,
+  ContactRoute: ContactRoute,
+  LivreRoute: LivreRoute,
+  PredicationsRoute: PredicationsRoute,
+  RessourcesRoute: RessourcesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
