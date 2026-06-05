@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import heroImg from "@/assets/pastor-hero.jpg";
 import preachingImg from "@/assets/pastor-preaching.jpg";
+import bibleImg from "@/assets/pastor-bible.jpg";
 import bookImg from "@/assets/book-teaser.jpg";
 import { ArrowUpRight, Calendar, Play, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -29,26 +31,49 @@ function Index() {
     "Région à bâtir",
     "Génération debout",
   ];
+  const slides = [heroImg, preachingImg, bibleImg];
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setActive((i) => (i + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [slides.length]);
   return (
     <>
       {/* HERO */}
-      <section className="relative isolate overflow-hidden">
-        {/* Decorative color blobs */}
-        <div aria-hidden className="absolute -left-32 top-24 -z-10 size-[420px] rounded-full bg-primary/40 blur-3xl blob-pulse" />
-        <div aria-hidden className="absolute -right-24 top-1/3 -z-10 size-[360px] rounded-full bg-accent/30 blur-3xl blob-pulse" style={{ animationDelay: "-3s" }} />
+      <section className="relative isolate min-h-[92vh] overflow-hidden">
+        {/* Background carousel */}
+        <div aria-hidden className="absolute inset-0 -z-20">
+          {slides.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt=""
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1400ms] ease-out ${
+                i === active ? "opacity-100 scale-100" : "opacity-0 scale-105"
+              }`}
+              style={{ transitionProperty: "opacity, transform" }}
+            />
+          ))}
+          {/* Dark gradient overlay for legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+        </div>
 
-        <div className="mx-auto grid min-h-[92vh] max-w-[1400px] grid-cols-1 items-center gap-10 px-6 pb-16 pt-28 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-32">
-          <div className="md:col-span-7 fade-up">
-            <p className="eyebrow inline-flex items-center gap-2">
-              <Sparkles className="size-3" /> Pasteur associé · ICC Occitanie · Toulouse
+        {/* Decorative blob accent */}
+        <div aria-hidden className="absolute -right-24 top-1/4 -z-10 size-[420px] rounded-full bg-primary/30 blur-3xl blob-pulse" />
+
+        <div className="mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-end px-6 pb-20 pt-32 md:px-10 md:pb-28 md:pt-40">
+          <div className="max-w-4xl fade-up">
+            <p className="eyebrow inline-flex items-center gap-2 text-white/80">
+              <Sparkles className="size-3 text-primary" /> Pasteur associé · ICC Occitanie · Toulouse
             </p>
-            <h1 className="mt-6 font-display text-5xl leading-[0.92] text-foreground sm:text-7xl md:text-[7.5rem]">
+            <h1 className="mt-6 font-display text-5xl leading-[0.92] text-white sm:text-7xl md:text-[7.5rem]">
               UN HOMME.<br />
               UNE MISSION.<br />
               UNE RÉGION{" "}
               <span className="highlight-circle">À BÂTIR.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-base text-muted-foreground md:text-lg">
+            <p className="mt-8 max-w-xl text-base text-white/80 md:text-lg">
               Prédicateur, enseignant, bâtisseur d'Église. De Toulouse vers la région —
               et au-delà. Découvrez la vision, les enseignements, et le livre à paraître.
             </p>
@@ -62,24 +87,25 @@ function Index() {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-foreground px-7 py-4 font-display text-xs tracking-[0.22em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-white px-7 py-4 font-display text-xs tracking-[0.22em] text-white transition-colors hover:bg-white hover:text-foreground"
               >
                 INVITER LE PASTEUR
               </Link>
             </div>
           </div>
 
-          <div className="relative md:col-span-5">
-            <div aria-hidden className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-accent via-primary to-accent/60 blur-2xl opacity-70" />
-            <div className="relative overflow-hidden rounded-[1.25rem] border-4 border-foreground shadow-[12px_12px_0_0_var(--color-foreground)]">
-              <img
-                src={heroImg}
-                alt="Pasteur Mira Fagbohoun en prédication"
-                width={1536}
-                height={1920}
-                className="aspect-[4/5] w-full object-cover object-[60%_center]"
+          {/* Carousel dots */}
+          <div className="mt-12 flex items-center gap-3">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Slide ${i + 1}`}
+                onClick={() => setActive(i)}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === active ? "w-10 bg-primary" : "w-5 bg-white/40 hover:bg-white/70"
+                }`}
               />
-            </div>
+            ))}
           </div>
         </div>
       </section>
