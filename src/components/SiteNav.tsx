@@ -16,7 +16,7 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-10">
         <Link to="/" className="font-display text-sm tracking-[0.24em] text-foreground">
           MIRA<span className="text-primary">.</span>FAGBOHOUN
@@ -37,7 +37,7 @@ export function SiteNav() {
 
         <Link
           to="/contact"
-          className="hidden bg-primary px-5 py-3 font-display text-[11px] tracking-[0.2em] text-primary-foreground transition-opacity hover:opacity-90 lg:inline-block"
+          className="hidden rounded-full bg-primary px-6 py-3 font-display text-[11px] tracking-[0.2em] text-primary-foreground shadow-[0_6px_24px_-8px_rgba(248,211,42,0.7)] transition-transform hover:-translate-y-0.5 lg:inline-block"
         >
           INVITER LE PASTEUR
         </Link>
@@ -68,7 +68,7 @@ export function SiteNav() {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-6 bg-primary px-5 py-4 text-center font-display text-xs tracking-[0.2em] text-primary-foreground"
+              className="mt-6 rounded-full bg-primary px-5 py-4 text-center font-display text-xs tracking-[0.2em] text-primary-foreground"
             >
               INVITER LE PASTEUR
             </Link>

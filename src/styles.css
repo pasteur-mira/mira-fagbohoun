@@ -68,39 +68,39 @@
 
 :root {
   --radius: 0.125rem;
-  /* Dark mode is the only mode — Ryan Leak inspired */
-  --background: oklch(0.06 0 0);            /* #0D0D0D */
-  --foreground: oklch(0.95 0.012 80);       /* #F5F0E8 warm off-white */
-  --card: oklch(0.115 0 0);                 /* #1A1A1A */
-  --card-foreground: oklch(0.95 0.012 80);
-  --popover: oklch(0.115 0 0);
-  --popover-foreground: oklch(0.95 0.012 80);
-  --primary: oklch(0.84 0.16 88);           /* #F5C842 warm yellow */
-  --primary-foreground: oklch(0.06 0 0);
-  --secondary: oklch(0.115 0 0);
-  --secondary-foreground: oklch(0.95 0.012 80);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.62 0 0);      /* #888 */
-  --accent: oklch(0.84 0.16 88);
-  --accent-foreground: oklch(0.06 0 0);
+  /* Light theme — Ryan Leak inspired: white canvas, vivid accents */
+  --background: oklch(0.99 0 0);             /* #FCFCFC */
+  --foreground: oklch(0.12 0 0);             /* near-black */
+  --card: oklch(0.97 0 0);                   /* #F3F3F3 */
+  --card-foreground: oklch(0.12 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.88 0.18 95);            /* #F8D32A vivid yellow */
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.42 0 0);
+  --accent: oklch(0.7 0.22 35);              /* warm orange */
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.6 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.27 0 0);                /* #3D3D3D */
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.84 0.16 88);
-  --chart-1: oklch(0.84 0.16 88);
-  --chart-2: oklch(0.62 0 0);
-  --chart-3: oklch(0.27 0 0);
-  --chart-4: oklch(0.95 0.012 80);
-  --chart-5: oklch(0.115 0 0);
-  --sidebar: oklch(0.06 0 0);
-  --sidebar-foreground: oklch(0.95 0.012 80);
-  --sidebar-primary: oklch(0.84 0.16 88);
-  --sidebar-primary-foreground: oklch(0.06 0 0);
-  --sidebar-accent: oklch(0.115 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0.012 80);
-  --sidebar-border: oklch(0.27 0 0);
-  --sidebar-ring: oklch(0.84 0.16 88);
+  --border: oklch(0.88 0 0);
+  --input: oklch(0.94 0 0);
+  --ring: oklch(0.88 0.18 95);
+  --chart-1: oklch(0.88 0.18 95);
+  --chart-2: oklch(0.7 0.22 35);
+  --chart-3: oklch(0.12 0 0);
+  --chart-4: oklch(0.62 0 0);
+  --chart-5: oklch(0.97 0 0);
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.12 0 0);
+  --sidebar-primary: oklch(0.88 0.18 95);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.12 0 0);
+  --sidebar-border: oklch(0.88 0 0);
+  --sidebar-ring: oklch(0.88 0.18 95);
 }
 
 @layer base {
@@ -133,7 +133,7 @@
     text-transform: uppercase;
     letter-spacing: 0.22em;
     font-size: 0.72rem;
-    color: var(--color-primary);
+    color: var(--color-accent);
   }
 
   ::selection {
@@ -141,3 +141,61 @@
     color: var(--color-primary-foreground);
   }
 }
+
+/* Hand-drawn yellow circle highlight (Ryan Leak style) */
+.highlight-circle {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.highlight-circle::after {
+  content: "";
+  position: absolute;
+  inset: -8% -6%;
+  border: 3px solid var(--color-primary);
+  border-radius: 50%;
+  transform: rotate(-2deg) scaleX(1.05);
+  pointer-events: none;
+  animation: draw-circle 1.2s ease-out both;
+}
+@keyframes draw-circle {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to   { clip-path: inset(0 0 0 0);   opacity: 1; }
+}
+
+.highlight-underline {
+  background-image: linear-gradient(transparent 62%, var(--color-primary) 62%, var(--color-primary) 92%, transparent 92%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Soft fade-up on scroll-in (CSS only via animation) */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.9s ease-out both; }
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-14px) rotate(-2deg); }
+}
+.float-y { animation: float-y 6s ease-in-out infinite; }
+
+/* Blob pulse behind book */
+@keyframes blob-pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50%      { transform: scale(1.08) rotate(8deg); }
+}
+.blob-pulse { animation: blob-pulse 9s ease-in-out infinite; }
