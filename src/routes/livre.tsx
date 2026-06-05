@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import bookImg from "@/assets/book-teaser.jpg";
+import bookImg from "@/assets/livre.jpeg";
 import { PreOrderForm } from "@/components/PreOrderForm";
 import { Check } from "lucide-react";
 
@@ -22,7 +22,7 @@ function Livre() {
         <div className="mx-auto grid max-w-[1400px] items-center gap-16 px-6 pb-20 pt-32 md:grid-cols-12 md:gap-20 md:px-10 md:pb-28 md:pt-44">
           <div className="md:col-span-6">
             <p className="eyebrow">Bientôt · Pré-commande</p>
-            <h1 className="mt-6 font-display text-5xl leading-[0.9] text-foreground md:text-8xl">
+            <h1 className="mt-6 font-display text-5xl leading-[0.9] text-foreground md:text-6xl font-semibold">
               UN LIVRE.<br/>
               <span className="text-primary">UNE PAROLE</span><br/>
               QUI DURE.

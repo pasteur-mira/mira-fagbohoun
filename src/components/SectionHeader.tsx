@@ -5,16 +5,18 @@ export function SectionHeader({
   title,
   intro,
   align = "left",
+  titleClassName = "",
 }: {
   eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
   align?: "left" | "center";
+  titleClassName?: string;
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h2 className="mt-5 font-display text-4xl leading-[0.95] text-foreground md:text-6xl">
+      <h2 className={`mt-5 font-display text-4xl leading-[0.95] text-foreground md:text-6xl ${titleClassName}`}>
         {title}
       </h2>
       {intro && (

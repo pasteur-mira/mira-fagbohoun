@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail } from "lucide-react";
+import logoBlack from "@/assets/logo-black.png";
 
 export function SiteFooter() {
   return (
@@ -8,8 +9,8 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <p className="eyebrow">Pasteur associé · ICC Occitanie</p>
-            <h3 className="mt-4 font-display text-3xl leading-[0.95] text-foreground md:text-5xl">
-              MIRA<br />FAGBOHOUN
+            <h3 className="mt-4 font-display text-3xl leading-[0.95] text-foreground md:text-4xl font-semibold">
+              MIRA FAGBOHOUN
             </h3>
             <p className="mt-6 max-w-md text-sm text-muted-foreground">
               Un homme. Une mission. Une région à bâtir.

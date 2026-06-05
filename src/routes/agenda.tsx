@@ -26,7 +26,7 @@ function Agenda() {
     <>
       <section className="mx-auto max-w-[1400px] px-6 pb-16 pt-32 md:px-10 md:pb-24 md:pt-44">
         <p className="eyebrow">À venir</p>
-        <h1 className="mt-6 max-w-5xl font-display text-5xl leading-[0.9] text-foreground md:text-8xl">
+        <h1 className="mt-6 max-w-5xl font-display text-5xl leading-[0.9] text-foreground md:text-6xl font-semibold">
           CERTAINS MOMENTS<br/>SE <span className="text-primary">VIVENT.</span>
         </h1>
         <p className="mt-8 max-w-2xl text-base text-muted-foreground md:text-lg">

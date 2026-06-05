@@ -1,12 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroImg from "@/assets/pastor-hero.jpg";
-import preachingImg from "@/assets/pastor-preaching.jpg";
-import bibleImg from "@/assets/pastor-bible.jpg";
-import bookImg from "@/assets/book-teaser.jpg";
+import banniere1 from "@/assets/banniere1.jpeg";
+import banniere2 from "@/assets/banniere2.jpeg";
+import banniere3 from "@/assets/banniere3.jpeg";
+import preachingImg from "@/assets/pastor-preaching1.jpeg";
+import bookImg from "@/assets/livre.jpeg";
 import { ArrowUpRight, Calendar, Play, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
+import { Reveal } from "@/components/Reveal";
+import { StatsSection } from "@/components/StatsSection";
+import { VideoSection } from "@/components/VideoSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,7 +36,7 @@ function Index() {
     "Région à bâtir",
     "Génération debout",
   ];
-  const slides = [heroImg, preachingImg, bibleImg];
+  const slides = [banniere1, banniere2, banniere3];
   const [active, setActive] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setActive((i) => (i + 1) % slides.length), 5000);
@@ -64,16 +69,16 @@ function Index() {
 
         <div className="mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-end px-6 pb-20 pt-32 md:px-10 md:pb-28 md:pt-40">
           <div className="max-w-4xl fade-up">
-            <p className="eyebrow inline-flex items-center gap-2 text-white/80">
-              <Sparkles className="size-3 text-primary" /> Pasteur associé · ICC Occitanie · Toulouse
+            <p className="eyebrow inline-flex items-center gap-2 text-white/80 font-medium">
+               Pasteur associé · ICC Occitanie · Toulouse
             </p>
-            <h1 className="mt-6 font-display text-5xl leading-[0.92] text-white sm:text-7xl md:text-[7.5rem]">
-              UN HOMME.<br />
+            <h1 className="mt-6 font-display text-3xl leading-[0.92] text-white sm:text-5xl md:text-6xl font-semibold">
+              UN HOMME.
               UNE MISSION.<br />
               UNE RÉGION{" "}
               <span className="highlight-circle">À BÂTIR.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-base text-white/80 md:text-lg">
+            <p className="mt-8 max-w-xl text-base text-white/80 md:text-lg ">
               Prédicateur, enseignant, bâtisseur d'Église. De Toulouse vers la région —
               et au-delà. Découvrez la vision, les enseignements, et le livre à paraître.
             </p>
@@ -112,7 +117,7 @@ function Index() {
 
       {/* MARQUEE */}
       <section className="overflow-hidden border-y-2 border-foreground bg-foreground py-5 text-background">
-        <div className="marquee-track whitespace-nowrap font-display text-2xl tracking-[0.1em] md:text-4xl">
+        <div className="marquee-track whitespace-nowrap font-display text-1xl tracking-[0.1em] md:text-2xl font-semibold">
           {[...marquee, ...marquee].map((m, i) => (
             <span key={i} className="mx-8 inline-flex items-center gap-8">
               {m}
@@ -122,10 +127,13 @@ function Index() {
         </div>
       </section>
 
+      {/* STATS */}
+      {/* <StatsSection /> */}
+
       {/* BIO TEASER */}
       <section className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36">
         <div className="grid gap-16 md:grid-cols-12 md:gap-20">
-          <div className="md:col-span-7">
+          <Reveal className="md:col-span-7">
             <SectionHeader
               eyebrow="À propos"
               title={<>QUI EST LE PASTEUR<br/><span className="highlight-underline">MIRA FAGBOHOUN</span> ?</>}
@@ -140,8 +148,8 @@ function Index() {
             >
               LIRE LA BIOGRAPHIE COMPLÈTE <ArrowUpRight className="size-4" />
             </Link>
-          </div>
-          <div className="relative md:col-span-5">
+          </Reveal>
+          <Reveal delay={150} className="relative md:col-span-5">
             <div aria-hidden className="absolute -right-3 -top-3 -z-10 h-full w-full rounded-[1rem] bg-primary" />
             <img
               src={preachingImg}
@@ -151,14 +159,14 @@ function Index() {
               height={1024}
               className="aspect-[4/5] w-full rounded-[1rem] object-cover"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* PRÉDICATIONS */}
       <section className="bg-card">
         <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36">
-          <div className="flex flex-wrap items-end justify-between gap-8">
+          <Reveal className="flex flex-wrap items-end justify-between gap-8">
             <SectionHeader
               eyebrow="Enseignements"
               title={<>LA PAROLE<br/>QUI <span className="highlight-circle">BÂTIT</span>.</>}
@@ -169,7 +177,7 @@ function Index() {
             >
               EXPLORER TOUTES LES RESSOURCES <ArrowUpRight className="size-4" />
             </Link>
-          </div>
+          </Reveal>
 
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {[
@@ -177,28 +185,36 @@ function Index() {
               { t: "La maturité qui transforme", d: "Enseignement", date: "Février 2026", tint: "bg-accent" },
               { t: "Foi pratique & discernement", d: "Culte ICC Toulouse", date: "Janvier 2026", tint: "bg-foreground" },
             ].map((p, i) => (
-              <article key={p.t} className="group relative aspect-[4/3] overflow-hidden rounded-[1rem] border-2 border-foreground bg-background transition-transform hover:-translate-y-1">
-                <div className={`absolute inset-0 ${p.tint} mix-blend-multiply opacity-80`} />
-                <img src={preachingImg} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                  <div className="flex items-center gap-2 text-primary">
-                    <Play className="size-4 fill-current" />
-                    <p className="font-display text-[10px] tracking-[0.22em]">{p.d.toUpperCase()}</p>
+              <Reveal key={p.t} delay={i * 100}>
+                <article className="group relative aspect-[4/3] overflow-hidden rounded-[1rem] border-2 border-foreground bg-background transition-transform hover:-translate-y-1">
+                  <div className={`absolute inset-0 ${p.tint} mix-blend-multiply opacity-80`} />
+                  <img src={preachingImg} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                    <div className="flex items-center gap-2 text-primary">
+                      <Play className="size-4 fill-current" />
+                      <p className="font-display text-[10px] tracking-[0.22em]">{p.d.toUpperCase()}</p>
+                    </div>
+                    <h3 className="mt-3 font-display text-xl leading-tight">{p.t.toUpperCase()}</h3>
+                    <p className="mt-2 text-xs opacity-80">{p.date}</p>
                   </div>
-                  <h3 className="mt-3 font-display text-xl leading-tight">{p.t.toUpperCase()}</h3>
-                  <p className="mt-2 text-xs opacity-80">{p.date}</p>
-                </div>
-              </article>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      {/* VIDEO */}
+      <VideoSection />
+
+      {/* TESTIMONIALS */}
+      <TestimonialsSection />
+
       {/* BOOK TEASER */}
       <section className="relative mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36">
         <div className="grid items-center gap-16 md:grid-cols-12 md:gap-20">
-          <div className="relative md:col-span-5">
+          <Reveal className="relative md:col-span-5">
             <div aria-hidden className="absolute inset-10 -z-10 rounded-full bg-primary blur-2xl opacity-70 blob-pulse" />
             <img
               src={bookImg}
@@ -208,8 +224,8 @@ function Index() {
               height={1536}
               className="float-y mx-auto w-full max-w-md drop-shadow-2xl"
             />
-          </div>
-          <div className="md:col-span-7">
+          </Reveal>
+          <Reveal delay={150} className="md:col-span-7">
             <p className="eyebrow inline-flex items-center gap-2"><span className="size-2 animate-pulse rounded-full bg-accent" /> Bientôt · Pré-commande ouverte</p>
             <h2 className="mt-5 font-display text-4xl leading-[0.95] text-foreground md:text-6xl">
               UN LIVRE<br/>
@@ -226,25 +242,27 @@ function Index() {
             >
               PRÉ-COMMANDER LE LIVRE <ArrowUpRight className="size-4" />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* AGENDA CTA */}
       <section className="bg-foreground text-background">
         <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-10 px-6 py-20 md:flex-row md:items-center md:px-10">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="eyebrow text-primary"><Calendar className="mr-2 inline size-3" /> Agenda</p>
             <h2 className="mt-4 font-display text-3xl leading-[0.95] md:text-5xl">
               CERTAINS MOMENTS<br/>SE <span className="highlight-circle">VIVENT</span>.
             </h2>
-          </div>
-          <Link
-            to="/agenda"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground transition-transform hover:-translate-y-0.5"
-          >
-            VOIR L'AGENDA COMPLET <ArrowUpRight className="size-4" />
-          </Link>
+          </Reveal>
+          <Reveal delay={150}>
+            <Link
+              to="/agenda"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              VOIR L'AGENDA COMPLET <ArrowUpRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>
