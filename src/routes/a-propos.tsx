@@ -54,7 +54,7 @@ function APropos() {
             <p>
               Un homme de foi pratique, ancré dans la région, tourné vers les nations.
               Son ministère porte une parole claire sur l'autorité spirituelle, la maturité chrétienne
-              et la gestion des finances — un ancrage concret et un discernement pratique
+              — un ancrage concret et un discernement pratique
               au service de l'Église locale.
             </p>
             <p>

@@ -4,6 +4,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── GRIFT — display / titres / boutons ─── */
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-ExtraBold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-Black.otf") format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Grift"; src: url("./assets/fonts/Grift-Italic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+
+/* ─── HELVENA — corps / nav / labels / UI ─── */
+@font-face { font-family: "Helvena"; src: url("./assets/fonts/Helvena-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvena"; src: url("./assets/fonts/Helvena-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvena"; src: url("./assets/fonts/Helvena-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvena"; src: url("./assets/fonts/Helvena-Semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvena"; src: url("./assets/fonts/Helvena-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ─── FRANIE — citations / accents éditoriaux ─── */
+@font-face { font-family: "Franie"; src: url("./assets/fonts/Franie-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Franie"; src: url("./assets/fonts/Franie-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Franie"; src: url("./assets/fonts/Franie-Italic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Franie"; src: url("./assets/fonts/Franie-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Franie"; src: url("./assets/fonts/Franie-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
 /*
  * Design system definition.
  *
@@ -59,9 +82,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Montserrat", system-ui, sans-serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
-  --font-serif: Georgia, "Times New Roman", serif;
+  --font-display: "Grift", system-ui, sans-serif;
+  --font-sans: "Helvena", system-ui, sans-serif;
+  --font-serif: "Franie", Georgia, serif;
 }
 
 :root {

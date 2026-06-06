@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Pasteur Mira Fagbohoun · ICC Occitanie · Toulouse" },
-      { name: "description", content: "Site officiel du Pasteur Mira Fagbohoun — Pasteur associé ICC Occitanie. Prédications, agenda, ressources et booking." },
+      { name: "description", content: "Site officiel du Pasteur Mira Fagbohoun — Pasteur associé ICC Occitanie. Prédications, agenda et ressources." },
       { name: "author", content: "Mira Fagbohoun" },
       { property: "og:title", content: "Pasteur Mira Fagbohoun · ICC Occitanie" },
       { property: "og:description", content: "Un homme. Une mission. Une région à bâtir." },
@@ -92,12 +92,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,400&family=DM+Sans:wght@400;500;700&display=swap",
-      },
       { rel: "stylesheet", href: appCss },
     ],
   }),

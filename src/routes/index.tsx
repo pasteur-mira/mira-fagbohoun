@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Pasteur Mira Fagbohoun · Un homme. Une mission. Une région à bâtir." },
-      { name: "description", content: "Pasteur Mira Fagbohoun · ICC Occitanie · Toulouse. Prédications, Agenda, Ressources, Booking." },
+      { name: "description", content: "Pasteur Mira Fagbohoun · ICC Occitanie · Toulouse. Prédications, Agenda et Ressources." },
       { property: "og:title", content: "Pasteur Mira Fagbohoun · ICC Occitanie" },
       { property: "og:description", content: "Un homme. Une mission. Une région à bâtir." },
     ],
@@ -70,7 +70,7 @@ function Index() {
         <div className="mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-end px-6 pb-20 pt-32 md:px-10 md:pb-28 md:pt-40">
           <div className="max-w-4xl fade-up">
             <p className="eyebrow inline-flex items-center gap-2 text-white/80 font-medium">
-               Pasteur associé · ICC Occitanie · Toulouse
+               PASTEUR ASSOCIÉ DES EGLISES ICC - PASTEUR PRINCIPAL EGLISES ICC OCCITANIE
             </p>
             <h1 className="mt-6 font-display text-3xl leading-[0.92] text-white sm:text-5xl md:text-6xl font-semibold">
               UN HOMME.
@@ -137,7 +137,7 @@ function Index() {
             <SectionHeader
               eyebrow="À propos"
               title={<>QUI EST LE PASTEUR<br/><span className="highlight-underline">MIRA FAGBOHOUN</span> ?</>}
-              intro="Il n'est pas venu à Toulouse par hasard. Pasteur associé de l'église Impact Centre Chrétien Occitanie, il y déploie un ministère d'enseignement, de vision et d'édification — sous le leadership du Pasteur Yvan Castanou."
+              intro="Il n'est pas venu à Toulouse par hasard. Pasteur associé des églises ICC et Pasteur principal des églises ICC occitanie, il y déploie un ministère d'enseignement, de vision et d'édification — sous le leadership du Pasteur Yvan Castanou."
             />
             <blockquote className="mt-10 border-l-4 border-primary pl-6 font-serif-italic text-xl text-foreground md:text-2xl">
               « Un homme de foi pratique, ancré dans la région, tourné vers les nations. »
@@ -209,7 +209,7 @@ function Index() {
       <VideoSection />
 
       {/* TESTIMONIALS */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
 
       {/* BOOK TEASER */}
       <section className="relative mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36">

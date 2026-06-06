@@ -1,6 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Youtube, Mail } from "lucide-react";
-import logoBlack from "@/assets/logo-black.png";
+import { Instagram, Youtube, Mail, Facebook } from "lucide-react";
+
+function TikTok({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.76a4.85 4.85 0 0 1-1.02-.07z" />
+    </svg>
+  );
+}
 
 export function SiteFooter() {
   return (
@@ -32,19 +39,34 @@ export function SiteFooter() {
             <p className="eyebrow">Suivre</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
+                <a href="https://www.youtube.com/@MiraFAGBOHOUNTV" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
+                  <Youtube className="size-4" /> @MiraFAGBOHOUNTV
+                </a>
+              </li>
+              <li>
                 <a href="https://www.youtube.com/@ICCTVToulouse" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
                   <Youtube className="size-4" /> ICC TV Toulouse
                 </a>
               </li>
               <li>
-                <a href="#" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
-                  <Instagram className="size-4" /> @pst.mira.fagbohoun
+                <a href="https://www.instagram.com/mirafagbohoun" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
+                  <Instagram className="size-4" /> @mirafagbohoun
                 </a>
               </li>
               <li>
-                <Link to="/contact" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
-                  <Mail className="size-4" /> Booking & contact
-                </Link>
+                <a href="https://www.facebook.com/mirafagbohoun" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
+                  <Facebook className="size-4" /> mirafagbohoun
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@mirafagbohoun" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
+                  <TikTok className="size-4" /> @mirafagbohoun
+                </a>
+              </li>
+              <li>
+                <a href="mailto:mirafagbohoun@gmail.com" className="inline-flex items-center gap-3 text-foreground hover:text-primary">
+                  <Mail className="size-4" /> mirafagbohoun@gmail.com
+                </a>
               </li>
             </ul>
           </div>
