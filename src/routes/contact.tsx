@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { z } from "zod";
 import { toast } from "sonner";
 import { Mail, Instagram, Youtube, Facebook } from "lucide-react";
+import { contactApi } from "@/lib/api";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -16,11 +16,6 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const schema = z.object({
-  name: z.string().trim().min(2).max(100),
-  email: z.string().trim().email().max(255),
-  message: z.string().trim().min(10).max(1500),
-});
 
 function TikTok({ className }: { className?: string }) {
   return (
@@ -42,18 +37,23 @@ const socials = [
 function Contact() {
   const [loading, setLoading] = useState(false);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     const fd = new FormData(e.currentTarget);
-    const parsed = schema.safeParse(Object.fromEntries(fd.entries()));
-    setLoading(false);
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Formulaire invalide");
-      return;
+    try {
+      await contactApi.send({
+        full_name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        message: fd.get("message") as string,
+      });
+      toast.success("Message envoyé. L'équipe vous répondra rapidement.");
+      e.currentTarget.reset();
+    } catch (err: any) {
+      toast.error(err.message ?? "Une erreur est survenue, veuillez réessayer.");
+    } finally {
+      setLoading(false);
     }
-    toast.success("Message envoyé. L'équipe vous répondra rapidement.");
-    e.currentTarget.reset();
   }
 
   return (

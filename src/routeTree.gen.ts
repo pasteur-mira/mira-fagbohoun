@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RessourcesRouteImport } from './routes/ressources'
 import { Route as PredicationsRouteImport } from './routes/predications'
+import { Route as NotesRouteImport } from './routes/notes'
 import { Route as LivreRouteImport } from './routes/livre'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AgendaRouteImport } from './routes/agenda'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -33,6 +35,11 @@ const PredicationsRoute = PredicationsRouteImport.update({
   path: '/predications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LivreRoute = LivreRouteImport.update({
   id: '/livre',
   path: '/livre',
@@ -46,6 +53,11 @@ const ContactRoute = ContactRouteImport.update({
 const AgendaRoute = AgendaRouteImport.update({
   id: '/agenda',
   path: '/agenda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AProposRoute = AProposRouteImport.update({
@@ -62,9 +74,11 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/contact': typeof ContactRoute
   '/livre': typeof LivreRoute
+  '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -72,9 +86,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/contact': typeof ContactRoute
   '/livre': typeof LivreRoute
+  '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -83,9 +99,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
+  '/admin': typeof AdminRoute
   '/agenda': typeof AgendaRoute
   '/contact': typeof ContactRoute
   '/livre': typeof LivreRoute
+  '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -95,9 +113,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/a-propos'
+    | '/admin'
     | '/agenda'
     | '/contact'
     | '/livre'
+    | '/notes'
     | '/predications'
     | '/ressources'
     | '/sitemap.xml'
@@ -105,9 +125,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/a-propos'
+    | '/admin'
     | '/agenda'
     | '/contact'
     | '/livre'
+    | '/notes'
     | '/predications'
     | '/ressources'
     | '/sitemap.xml'
@@ -115,9 +137,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/a-propos'
+    | '/admin'
     | '/agenda'
     | '/contact'
     | '/livre'
+    | '/notes'
     | '/predications'
     | '/ressources'
     | '/sitemap.xml'
@@ -126,9 +150,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
+  AdminRoute: typeof AdminRoute
   AgendaRoute: typeof AgendaRoute
   ContactRoute: typeof ContactRoute
   LivreRoute: typeof LivreRoute
+  NotesRoute: typeof NotesRoute
   PredicationsRoute: typeof PredicationsRoute
   RessourcesRoute: typeof RessourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -157,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PredicationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/livre': {
       id: '/livre'
       path: '/livre'
@@ -176,6 +209,13 @@ declare module '@tanstack/react-router' {
       path: '/agenda'
       fullPath: '/agenda'
       preLoaderRoute: typeof AgendaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/a-propos': {
@@ -198,9 +238,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
+  AdminRoute: AdminRoute,
   AgendaRoute: AgendaRoute,
   ContactRoute: ContactRoute,
   LivreRoute: LivreRoute,
+  NotesRoute: NotesRoute,
   PredicationsRoute: PredicationsRoute,
   RessourcesRoute: RessourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
