@@ -41,7 +41,7 @@ function Predications() {
           sur les plateformes et dans les assemblées.
         </p>
         <a href="https://www.youtube.com/@ICCTVToulouse" target="_blank" rel="noreferrer"
-          className="mt-10 inline-flex items-center gap-3 border border-foreground px-6 py-4 font-display text-xs tracking-[0.22em] text-foreground hover:bg-foreground hover:text-background">
+          className="mt-10 inline-flex items-center gap-3 rounded-full border border-foreground px-6 py-4 font-display text-xs tracking-[0.22em] text-foreground hover:bg-foreground hover:text-background">
           <Youtube className="size-4" /> REGARDER SUR ICC TV TOULOUSE
         </a>
       </section>

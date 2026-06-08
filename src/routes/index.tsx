@@ -6,12 +6,11 @@ import banniere2 from "@/assets/banniere2.jpeg";
 import banniere3 from "@/assets/banniere3.jpeg";
 import preachingImg from "@/assets/pastor-preaching1.jpeg";
 import bookImg from "@/assets/livre.jpeg";
-import { ArrowUpRight, Calendar, Play, Sparkles } from "lucide-react";
+import { ArrowUpRight, Calendar, Play } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
-import { StatsSection } from "@/components/StatsSection";
 import { VideoSection } from "@/components/VideoSection";
-import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { predicationsApi, getYoutubeThumbnail, type Predication } from "@/lib/api";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,6 +25,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [sermons, setSermons] = useState<Predication[]>([]);
+  useEffect(() => {
+    predicationsApi.list()
+      .then((res) => setSermons(res.data.slice(0, 3)))
+      .catch(() => {});
+  }, []);
+
   const marquee = [
     "Foi pratique",
     "Autorité spirituelle",
@@ -180,27 +186,39 @@ function Index() {
           </Reveal>
 
           <div className="mt-16 grid gap-6 md:grid-cols-3">
-            {[
-              { t: "L'autorité spirituelle aujourd'hui", d: "Série · 3 messages", date: "Mars 2026", tint: "bg-primary" },
-              { t: "La maturité qui transforme", d: "Enseignement", date: "Février 2026", tint: "bg-accent" },
-              { t: "Foi pratique & discernement", d: "Culte ICC Toulouse", date: "Janvier 2026", tint: "bg-foreground" },
-            ].map((p, i) => (
-              <Reveal key={p.t} delay={i * 100}>
-                <article className="group relative aspect-[4/3] overflow-hidden rounded-[1rem] border-2 border-foreground bg-background transition-transform hover:-translate-y-1">
-                  <div className={`absolute inset-0 ${p.tint} mix-blend-multiply opacity-80`} />
-                  <img src={preachingImg} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                    <div className="flex items-center gap-2 text-primary">
-                      <Play className="size-4 fill-current" />
-                      <p className="font-display text-[10px] tracking-[0.22em]">{p.d.toUpperCase()}</p>
-                    </div>
-                    <h3 className="mt-3 font-display text-xl leading-tight">{p.t.toUpperCase()}</h3>
-                    <p className="mt-2 text-xs opacity-80">{p.date}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+            {sermons.length === 0
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <Reveal key={i} delay={i * 100}>
+                    <div className="aspect-4/3 rounded-3xl border-2 border-foreground bg-muted animate-pulse" />
+                  </Reveal>
+                ))
+              : sermons.map((p, i) => {
+                  const thumbnail = p.thumbnail_url
+                    ?? (p.youtube_url ? getYoutubeThumbnail(p.youtube_url) : null)
+                    ?? preachingImg;
+                  const card = (
+                    <article className="group relative aspect-4/3 overflow-hidden rounded-3xl border-2 border-foreground bg-background transition-transform hover:-translate-y-1">
+                      <img src={thumbnail} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <div className="flex items-center gap-2 text-primary">
+                          <Play className="size-4 fill-current" />
+                          <p className="font-display text-[10px] tracking-[0.22em]">{p.category.toUpperCase()}</p>
+                        </div>
+                        <h3 className="mt-3 font-display text-xl leading-tight">{p.title.toUpperCase()}</h3>
+                        <p className="mt-2 text-xs opacity-80">{p.date_label}</p>
+                      </div>
+                    </article>
+                  );
+                  return (
+                    <Reveal key={p.id} delay={i * 100}>
+                      {p.youtube_url
+                        ? <a href={p.youtube_url} target="_blank" rel="noreferrer">{card}</a>
+                        : card}
+                    </Reveal>
+                  );
+                })
+            }
           </div>
         </div>
       </section>

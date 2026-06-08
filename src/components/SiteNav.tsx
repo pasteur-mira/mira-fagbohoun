@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import logoBlack from "@/assets/logo-black.png";
 import logoBlanc from "@/assets/logo-blanc.png";
+import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { to: "/", label: "Accueil" },
@@ -64,12 +65,15 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <Link
-          to="/contact"
-          className="hidden rounded-full bg-primary px-6 py-3 font-display text-[11px] tracking-[0.2em] text-primary-foreground shadow-[0_6px_24px_-8px_rgba(248,211,42,0.7)] transition-transform hover:-translate-y-0.5 lg:inline-block"
-        >
-          INVITER LE PASTEUR
-        </Link>
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle className={`transition-colors ${isHome ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"}`} />
+          <Link
+            to="/contact"
+            className="rounded-full bg-primary px-6 py-3 font-display text-[11px] tracking-[0.2em] text-primary-foreground shadow-[0_6px_24px_-8px_rgba(248,211,42,0.7)] transition-transform hover:-translate-y-0.5"
+          >
+            INVITER LE PASTEUR
+          </Link>
+        </div>
 
         <button
           aria-label="Menu"
@@ -96,13 +100,17 @@ export function SiteNav() {
                 {l.label.toUpperCase()}
               </Link>
             ))}
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-6 rounded-full bg-primary px-5 py-4 text-center font-display text-xs tracking-[0.2em] text-primary-foreground"
-            >
-              INVITER LE PASTEUR
-            </Link>
+            <div className="mt-6 flex flex-col gap-3">
+              <Link
+                to="/contact"
+                onClick={() => setOpen(false)}
+                className="rounded-full bg-primary px-5 py-4 text-center font-display text-xs tracking-[0.2em] text-primary-foreground"
+              >
+                INVITER LE PASTEUR
+              </Link>
+              <ThemeToggle className={`flex items-center justify-center gap-2 border py-3 font-display text-[10px] tracking-[0.18em] transition-colors
+                ${isHome ? "border-white/20 text-white/70" : "border-border text-muted-foreground"}`} />
+            </div>
           </nav>
         </div>
       )}

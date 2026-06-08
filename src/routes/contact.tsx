@@ -117,7 +117,7 @@ function Contact() {
                 <div>
                   <button
                     disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-primary px-8 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground hover:opacity-90 disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground hover:opacity-90 disabled:opacity-50"
                   >
                     {loading ? "ENVOI..." : "ENVOYER LE MESSAGE"}
                   </button>

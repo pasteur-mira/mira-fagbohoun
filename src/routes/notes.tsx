@@ -77,7 +77,7 @@ function Notes() {
                     className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/30 transition-opacity"
                     aria-label={`Ouvrir ${note.title}`}
                   >
-                    <span className="border border-white px-4 py-2 font-display text-[10px] tracking-[0.18em] text-white">
+                    <span className="rounded-full border border-white px-4 py-2 font-display text-[10px] tracking-[0.18em] text-white">
                       OUVRIR
                     </span>
                   </a>
@@ -105,7 +105,7 @@ function Notes() {
                       download={note.file_name}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 bg-primary px-4 py-2.5 font-display text-[10px] tracking-[0.18em] text-primary-foreground hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 font-display text-[10px] tracking-[0.18em] text-primary-foreground hover:opacity-90 transition-opacity"
                     >
                       <Download className="size-3" /> TÉLÉCHARGER
                     </a>

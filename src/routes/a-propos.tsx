@@ -114,7 +114,7 @@ function APropos() {
             intro="Affermir les croyants, équiper les leaders, planter une foi qui dure — la vision du ministère s'incarne sur le terrain, semaine après semaine."
             titleClassName="font-semibold"
           />
-          <Link to="/contact" className="mt-12 inline-flex items-center gap-2 bg-primary px-6 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground hover:opacity-90">
+          <Link to="/contact" className="mt-12 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground hover:opacity-90">
             INVITER LE PASTEUR MIRA
           </Link>
         </Reveal>
