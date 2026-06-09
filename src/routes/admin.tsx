@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LayoutDashboard, MessageSquare, CalendarDays, Mic2, BookOpen, Menu, ChevronRight } from "lucide-react";
+import { MessageSquare, CalendarDays, Mic2, BookOpen, ShoppingBag, Image, Repeat, Menu, ChevronRight } from "lucide-react";
 import { authApi, getToken, setToken, clearToken, type User } from "@/lib/api";
 import { Spinner } from "@/components/admin/shared";
-import { SectionDashboard } from "@/components/admin/SectionDashboard";
 import { SectionContacts } from "@/components/admin/SectionContacts";
 import { SectionAgenda } from "@/components/admin/SectionAgenda";
 import { SectionPredications } from "@/components/admin/SectionPredications";
 import { SectionNotes } from "@/components/admin/SectionNotes";
+import { SectionOrders } from "@/components/admin/SectionOrders";
+import { SectionBanners } from "@/components/admin/SectionBanners";
+import { SectionRecurringEvents } from "@/components/admin/SectionRecurringEvents";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -16,14 +18,16 @@ export const Route = createFileRoute("/admin")({
   component: Admin,
 });
 
-type Section = "dashboard" | "contacts" | "agenda" | "predications" | "notes";
+type Section = "contacts" | "agenda" | "predications" | "notes" | "orders" | "banners" | "recurring";
 
 const NAV_ITEMS: { id: Section; label: string; icon: React.ElementType }[] = [
-  { id: "dashboard",    label: "Tableau de bord",    icon: LayoutDashboard },
   { id: "contacts",     label: "Messages",            icon: MessageSquare },
   { id: "agenda",       label: "Agenda",              icon: CalendarDays },
   { id: "predications", label: "Prédications",        icon: Mic2 },
   { id: "notes",        label: "Notes & Études",      icon: BookOpen },
+  { id: "orders",       label: "Commandes",           icon: ShoppingBag },
+  { id: "banners",      label: "Bannières Hero",      icon: Image },
+  { id: "recurring",    label: "Programme hebdo",     icon: Repeat },
 ];
 
 /* ─── Root ─── */
@@ -46,7 +50,7 @@ function Admin() {
 
 /* ─── Shell with sidebar ─── */
 function AdminShell({ user, onLogout }: { user: User; onLogout: () => void }) {
-  const [section,  setSection]  = useState<Section>("dashboard");
+  const [section,  setSection]  = useState<Section>("contacts");
   const [sideOpen, setSideOpen] = useState(false);
 
   async function handleLogout() {
@@ -123,11 +127,13 @@ function AdminShell({ user, onLogout }: { user: User; onLogout: () => void }) {
         </header>
 
         <main className="flex-1 overflow-y-auto p-6 md:p-10">
-          {section === "dashboard"    && <SectionDashboard user={user} />}
           {section === "contacts"     && <SectionContacts />}
           {section === "agenda"       && <SectionAgenda />}
           {section === "predications" && <SectionPredications />}
           {section === "notes"       && <SectionNotes />}
+          {section === "orders"      && <SectionOrders />}
+          {section === "banners"     && <SectionBanners />}
+          {section === "recurring"   && <SectionRecurringEvents />}
         </main>
       </div>
     </div>

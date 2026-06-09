@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RessourcesRouteImport } from './routes/ressources'
+import { Route as ProgrammeRouteImport } from './routes/programme'
 import { Route as PredicationsRouteImport } from './routes/predications'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as LivreRouteImport } from './routes/livre'
@@ -19,6 +20,7 @@ import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PaiementSuccessRouteImport } from './routes/paiement.success'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -28,6 +30,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RessourcesRoute = RessourcesRouteImport.update({
   id: '/ressources',
   path: '/ressources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammeRoute = ProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PredicationsRoute = PredicationsRouteImport.update({
@@ -70,6 +77,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaiementSuccessRoute = PaiementSuccessRouteImport.update({
+  id: '/paiement/success',
+  path: '/paiement/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -80,8 +92,10 @@ export interface FileRoutesByFullPath {
   '/livre': typeof LivreRoute
   '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
+  '/programme': typeof ProgrammeRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/paiement/success': typeof PaiementSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,8 +106,10 @@ export interface FileRoutesByTo {
   '/livre': typeof LivreRoute
   '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
+  '/programme': typeof ProgrammeRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/paiement/success': typeof PaiementSuccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -105,8 +121,10 @@ export interface FileRoutesById {
   '/livre': typeof LivreRoute
   '/notes': typeof NotesRoute
   '/predications': typeof PredicationsRoute
+  '/programme': typeof ProgrammeRoute
   '/ressources': typeof RessourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/paiement/success': typeof PaiementSuccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -119,8 +137,10 @@ export interface FileRouteTypes {
     | '/livre'
     | '/notes'
     | '/predications'
+    | '/programme'
     | '/ressources'
     | '/sitemap.xml'
+    | '/paiement/success'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,8 +151,10 @@ export interface FileRouteTypes {
     | '/livre'
     | '/notes'
     | '/predications'
+    | '/programme'
     | '/ressources'
     | '/sitemap.xml'
+    | '/paiement/success'
   id:
     | '__root__'
     | '/'
@@ -143,8 +165,10 @@ export interface FileRouteTypes {
     | '/livre'
     | '/notes'
     | '/predications'
+    | '/programme'
     | '/ressources'
     | '/sitemap.xml'
+    | '/paiement/success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,8 +180,10 @@ export interface RootRouteChildren {
   LivreRoute: typeof LivreRoute
   NotesRoute: typeof NotesRoute
   PredicationsRoute: typeof PredicationsRoute
+  ProgrammeRoute: typeof ProgrammeRoute
   RessourcesRoute: typeof RessourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  PaiementSuccessRoute: typeof PaiementSuccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -174,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/ressources'
       fullPath: '/ressources'
       preLoaderRoute: typeof RessourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programme': {
+      id: '/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof ProgrammeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/predications': {
@@ -232,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/paiement/success': {
+      id: '/paiement/success'
+      path: '/paiement/success'
+      fullPath: '/paiement/success'
+      preLoaderRoute: typeof PaiementSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -244,8 +284,10 @@ const rootRouteChildren: RootRouteChildren = {
   LivreRoute: LivreRoute,
   NotesRoute: NotesRoute,
   PredicationsRoute: PredicationsRoute,
+  ProgrammeRoute: ProgrammeRoute,
   RessourcesRoute: RessourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  PaiementSuccessRoute: PaiementSuccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

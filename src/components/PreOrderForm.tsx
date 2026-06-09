@@ -1,80 +1,88 @@
 import { useState } from "react";
-import { z } from "zod";
-import { toast } from "sonner";
-
-const schema = z.object({
-  name: z.string().trim().min(2, "Nom trop court").max(100),
-  email: z.string().trim().email("Email invalide").max(255),
-  quantity: z.coerce.number().int().min(1).max(50),
-  message: z.string().trim().max(500).optional(),
-});
+import { ShoppingCart, AlertCircle } from "lucide-react";
+import { ordersApi } from "@/lib/api";
 
 export function PreOrderForm() {
   const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [globalError, setGlobalError] = useState("");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setFieldErrors({});
+    setGlobalError("");
     setLoading(true);
+
     const fd = new FormData(e.currentTarget);
-    const parsed = schema.safeParse({
-      name: fd.get("name"),
-      email: fd.get("email"),
-      quantity: fd.get("quantity") ?? 1,
-      message: fd.get("message") ?? "",
-    });
-    setLoading(false);
-    if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Formulaire invalide");
-      return;
+    const full_name = fd.get("full_name") as string;
+    const email     = fd.get("email") as string;
+
+    try {
+      const res = await ordersApi.create({ full_name, email });
+      window.location.href = res.checkout_url;
+    } catch (err: any) {
+      if (err?.errors) {
+        const mapped: Record<string, string> = {};
+        for (const [key, msgs] of Object.entries(err.errors as Record<string, string[]>)) {
+          mapped[key] = msgs[0] ?? "";
+        }
+        setFieldErrors(mapped);
+      } else {
+        setGlobalError(err.message ?? "Une erreur est survenue. Veuillez réessayer.");
+      }
+      setLoading(false);
     }
-    // Persist locally — backend wiring later
-    const key = "preorders";
-    const prev = JSON.parse(localStorage.getItem(key) ?? "[]");
-    prev.push({ ...parsed.data, at: new Date().toISOString() });
-    localStorage.setItem(key, JSON.stringify(prev));
-    toast.success("Pré-commande enregistrée. Vous serez notifié dès la sortie du livre.");
-    e.currentTarget.reset();
   }
+
+  const inputCls = "mt-3 w-full border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none";
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
-      <Field label="Nom complet" name="name" required />
-      <Field label="Email" name="email" type="email" required />
-      <Field label="Quantité souhaitée" name="quantity" type="number" defaultValue="1" required />
+      {globalError && (
+        <div className="flex items-start gap-3 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <AlertCircle className="mt-0.5 size-4 shrink-0" />
+          {globalError}
+        </div>
+      )}
+
       <div>
-        <label className="eyebrow block">Message (optionnel)</label>
-        <textarea
-          name="message"
-          rows={4}
-          className="mt-3 w-full border border-border bg-background px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+        <label htmlFor="full_name" className="eyebrow block">Nom complet *</label>
+        <input
+          id="full_name"
+          name="full_name"
+          type="text"
+          required
+          autoComplete="name"
+          className={`${inputCls} ${fieldErrors.full_name ? "border-destructive" : ""}`}
         />
+        {fieldErrors.full_name && <p className="mt-1 text-xs text-destructive">{fieldErrors.full_name}</p>}
       </div>
+
+      <div>
+        <label htmlFor="email" className="eyebrow block">Email *</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          className={`${inputCls} ${fieldErrors.email ? "border-destructive" : ""}`}
+        />
+        {fieldErrors.email && <p className="mt-1 text-xs text-destructive">{fieldErrors.email}</p>}
+      </div>
+
       <button
         type="submit"
         disabled={loading}
         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 font-display text-xs tracking-[0.22em] text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
       >
-        {loading ? "ENVOI..." : "RÉSERVER MON EXEMPLAIRE"}
+        <ShoppingCart className="size-4" />
+        {loading ? "REDIRECTION..." : "COMMANDER · 25 €"}
       </button>
-      <p className="text-xs text-muted-foreground">
-        Aucun paiement à cette étape · Vous serez recontacté à la sortie du livre.
+
+      <p className="text-xs text-muted-foreground text-center">
+        Paiement sécurisé par Mollie · Visa, Mastercard, iDEAL, Bancontact
       </p>
     </form>
-  );
-}
-
-function Field({ label, name, type = "text", required, defaultValue }: { label: string; name: string; type?: string; required?: boolean; defaultValue?: string }) {
-  return (
-    <div>
-      <label htmlFor={name} className="eyebrow block">{label}{required && " *"}</label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        defaultValue={defaultValue}
-        className="mt-3 w-full border border-border bg-background px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-      />
-    </div>
   );
 }

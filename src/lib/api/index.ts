@@ -28,7 +28,11 @@ export async function apiFetch<T>(
   });
 
   const json = await res.json().catch(() => ({ message: `HTTP ${res.status}` }));
-  if (!res.ok) throw new Error(json.message ?? `HTTP ${res.status}`);
+  if (!res.ok) {
+    const err: any = new Error(json.message ?? `HTTP ${res.status}`);
+    if (json.errors) err.errors = json.errors;
+    throw err;
+  }
   return json as T;
 }
 
@@ -222,6 +226,55 @@ export function formatSize(bytes: number): string {
   return `${Math.round(bytes / 1024)} Ko`;
 }
 
+export interface Order {
+  id: number;
+  full_name: string;
+  email: string;
+  amount: string;
+  currency: string;
+  status: "pending" | "paid" | "failed" | "cancelled" | "delivered";
+  status_label: string;
+  checkout_url: string;
+  mollie_payment_id: string;
+  created_at: string;
+}
+
+export interface OrdersListResponse {
+  data: Order[];
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+}
+
+export interface OrderResponse {
+  message: string;
+  checkout_url: string;
+  data: Order;
+}
+
+export const ordersApi = {
+  create: (payload: { full_name: string; email: string }) =>
+    apiFetch<OrderResponse>("/orders", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+};
+
+export const adminOrdersApi = {
+  list: (page = 1, perPage = 15) =>
+    apiFetch<OrdersListResponse>(`/admin/orders?page=${page}&per_page=${perPage}`),
+
+  get: (id: number) =>
+    apiFetch<{ data: Order }>(`/admin/orders/${id}`),
+
+  updateStatus: (id: number, status: Order["status"]) =>
+    apiFetch<{ message: string; data: Order }>(`/admin/orders/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    }),
+};
+
 export const notesApi = {
   list: () => apiFetch<{ data: Note[] }>("/notes"),
 };
@@ -244,6 +297,95 @@ export const adminNotesApi = {
 
   delete: (id: number) =>
     apiFetch<{ message: string }>(`/admin/notes/${id}`, { method: "DELETE" }),
+};
+
+export interface Banner {
+  id: number;
+  image_url: string;
+  title: string | null;
+  order: number;
+  is_active: boolean;
+  created_at: string;
+}
+
+export type RecurringEventType = "culte" | "priere" | "conference" | "jeune" | "evenement";
+
+export interface RecurringEvent {
+  id: number;
+  title: string;
+  day_of_week: string;
+  day_label: string;
+  times: string[];
+  times_label: string;
+  time_end: string | null;
+  place: string;
+  address: string;
+  type: RecurringEventType;
+  order: number;
+  is_published: boolean;
+}
+
+export interface RecurringEventPayload {
+  title: string;
+  day_of_week: string;
+  times: string[];
+  time_end?: string | null;
+  place: string;
+  address?: string;
+  type: RecurringEventType;
+  order?: number;
+  is_published?: boolean;
+}
+
+export const recurringEventsApi = {
+  list: () => apiFetch<{ data: RecurringEvent[] }>("/recurring-events"),
+};
+
+export const adminRecurringEventsApi = {
+  list: () =>
+    apiFetch<{ data: RecurringEvent[] }>("/admin/recurring-events"),
+
+  create: (payload: RecurringEventPayload) =>
+    apiFetch<{ data: RecurringEvent }>("/admin/recurring-events", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  update: (id: number, payload: Partial<RecurringEventPayload>) =>
+    apiFetch<{ data: RecurringEvent }>(`/admin/recurring-events/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    }),
+
+  togglePublish: (id: number) =>
+    apiFetch<{ data: RecurringEvent }>(`/admin/recurring-events/${id}/publish`, { method: "PATCH" }),
+
+  delete: (id: number) =>
+    apiFetch<{ message: string }>(`/admin/recurring-events/${id}`, { method: "DELETE" }),
+};
+
+export const bannersApi = {
+  list: () => apiFetch<{ data: Banner[] }>("/banners"),
+};
+
+export const adminBannersApi = {
+  list: () =>
+    apiFetch<{ data: Banner[] }>("/admin/banners"),
+
+  upload: (files: File[]) => {
+    const fd = new FormData();
+    files.forEach((f) => fd.append("images[]", f));
+    return apiFetch<{ message: string; data: Banner[] }>("/admin/banners", {
+      method: "POST",
+      body: fd,
+    });
+  },
+
+  toggle: (id: number) =>
+    apiFetch<{ message: string; data: Banner }>(`/admin/banners/${id}/toggle`, { method: "PATCH" }),
+
+  delete: (id: number) =>
+    apiFetch<{ message: string }>(`/admin/banners/${id}`, { method: "DELETE" }),
 };
 
 export const authApi = {

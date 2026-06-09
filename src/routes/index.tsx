@@ -10,7 +10,8 @@ import { ArrowUpRight, Calendar, Play } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { VideoSection } from "@/components/VideoSection";
-import { predicationsApi, getYoutubeThumbnail, type Predication } from "@/lib/api";
+import { predicationsApi, bannersApi, getYoutubeThumbnail, type Predication, type Banner } from "@/lib/api";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,8 +43,17 @@ function Index() {
     "Région à bâtir",
     "Génération debout",
   ];
-  const slides = [banniere1, banniere2, banniere3];
+  const FALLBACK_SLIDES = [banniere1, banniere2, banniere3];
+  const [banners, setBanners] = useState<Banner[]>([]);
+  useEffect(() => {
+    bannersApi.list().then((res) => setBanners(res.data)).catch(() => {});
+  }, []);
+  const slides = banners.length > 0 ? banners.map((b) => b.image_url) : FALLBACK_SLIDES;
+
   const [active, setActive] = useState(0);
+  useEffect(() => {
+    setActive(0);
+  }, [slides.length]);
   useEffect(() => {
     const t = setInterval(() => setActive((i) => (i + 1) % slides.length), 5000);
     return () => clearInterval(t);
