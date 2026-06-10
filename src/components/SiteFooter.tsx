@@ -15,7 +15,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1400px] px-6 py-20 md:px-10">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="eyebrow">Pasteur associé · ICC Occitanie</p>
+            <p className="eyebrow">  PASTEUR DES EGLISES ICC - PASTEUR PRINCIPAL EGLISES ICC OCCITANIE</p>
             <h3 className="mt-4 font-display text-3xl leading-[0.95] text-foreground md:text-4xl font-semibold">
               MIRA FAGBOHOUN
             </h3>

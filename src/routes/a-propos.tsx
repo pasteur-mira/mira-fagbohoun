@@ -47,7 +47,7 @@ function APropos() {
               « Il n'est pas venu à Toulouse par hasard. »
             </p>
             <p>
-              Pasteur associé de l'église <strong className="text-foreground">Impact Centre Chrétien Occitanie</strong>,
+              Pasteur associé des églises <strong className="text-foreground">Impact Centre Chrétien Occitanie</strong>et pasteur principal eglise ICC Occitanie
               le Pasteur Mira Fagbohoun y déploie un ministère d'enseignement, de vision et d'édification —
               sous le leadership du Pasteur Yvan Castanou.
             </p>
