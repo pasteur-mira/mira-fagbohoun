@@ -152,7 +152,7 @@ function Index() {
           <Reveal className="md:col-span-7">
             <SectionHeader
               eyebrow="À propos"
-              title={<>QUI EST LE PASTEUR<br/><span className="highlight-underline">MIRA FAGBOHOUN</span> ?</>}
+              title={<>QUI EST LE PASTEURrrrr<br/><span className="highlight-underline">MIRA FAGBOHOUN</span> ?</>}
               intro="Il n'est pas venu à Toulouse par hasard. Pasteur associé des églises ICC et Pasteur principal des églises ICC occitanie, il y déploie un ministère d'enseignement, de vision et d'édification — sous le leadership du Pasteur Yvan Castanou."
             />
             <blockquote className="mt-10 border-l-4 border-primary pl-6 font-serif-italic text-xl text-foreground md:text-2xl">
