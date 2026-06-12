@@ -1,4 +1,5 @@
-export const API_BASE = "http://localhost:8000/api";
+// export const API_BASE = "http://localhost:8000/api"; // local
+export const API_BASE = "https://api.mirafagbohoun.com/api";
 
 const TOKEN_KEY = "admin_token";
 
