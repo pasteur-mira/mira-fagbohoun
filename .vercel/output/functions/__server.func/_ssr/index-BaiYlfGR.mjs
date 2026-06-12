@@ -1,8 +1,8 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { p as preachingImg } from "./pastor-preaching1-BlHZaa2F.mjs";
 import { b as bookImg } from "./livre-DUy_Fkdz.mjs";
 import { R as Reveal, S as SectionHeader } from "./Reveal-CRDOnlKr.mjs";
+import { p as preachingImg$1 } from "./pastor-preaching1-BlHZaa2F.mjs";
 import { p as predicationsApi, t as bannersApi, g as getYoutubeThumbnail } from "./index-_lkiTHdm.mjs";
 import { A as ArrowUpRight, P as Play, h as Calendar, Y as Youtube } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -21,6 +21,7 @@ import "../_libs/isbot.mjs";
 const banniere1 = "/assets/banniere1-D0wot2UM.jpeg";
 const banniere2 = "/assets/banniere2-DDb0FhOk.jpeg";
 const banniere3 = "/assets/banniere3-BpeM8ce_.jpeg";
+const preachingImg = "/assets/pastor-preaching2-DAzj7BLW.jpeg";
 function VideoSection() {
   const [playing, setPlaying] = reactExports.useState(false);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "bg-card", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-36", children: [
@@ -37,7 +38,7 @@ function VideoSection() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
-          src: preachingImg,
+          src: preachingImg$1,
           alt: "Regarder un enseignement",
           className: "h-full w-full object-cover opacity-60"
         }

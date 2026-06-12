@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { R as Route } from "./router-BTeyG8Js.mjs";
+import { R as Route } from "./router-CnONMYcp.mjs";
 import "../_libs/sonner.mjs";
 import { w as CircleCheckBig, C as Clock, a as Mail, x as ArrowRight } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";

@@ -539,7 +539,7 @@ const Route$2 = createFileRoute("/a-propos")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./index-C13lgsqW.mjs");
+const $$splitComponentImporter$1 = () => import("./index-BaiYlfGR.mjs");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -557,7 +557,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./paiement.success-CIXN8Vhv.mjs");
+const $$splitComponentImporter = () => import("./paiement.success-C3IZ-uWt.mjs");
 const Route = createFileRoute("/paiement/success")({
   validateSearch: (search) => ({
     order: search.order ? Number(search.order) : void 0
