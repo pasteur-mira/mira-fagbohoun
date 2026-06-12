@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import banniere1 from "@/assets/banniere1.jpeg";
 import banniere2 from "@/assets/banniere2.jpeg";
 import banniere3 from "@/assets/banniere3.jpeg";
-import preachingImg from "@/assets/pastor-preaching1.jpeg";
+import preachingImg from "@/assets/pastor-preaching2.jpeg";
 import bookImg from "@/assets/livre.jpeg";
 import { ArrowUpRight, Calendar, Play } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
